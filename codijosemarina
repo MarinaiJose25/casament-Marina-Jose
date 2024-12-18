@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda Marina & Jose</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB, #1E90FF);
+            color: #fff;
+            text-align: center;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .countdown {
+            margin: 20px 0;
+            font-size: 1.5em;
+        }
+
+        .section {
+            padding: 40px 20px;
+        }
+
+        .map {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+            height: 300px;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        form input, form button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        form button {
+            background: #1E90FF;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .gallery img {
+            max-width: 200px;
+            border-radius: 10px;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Boda Marina & Jose</h1>
+        <p>22 de agosto de 2025 | Can Marial, Sant Vicenç de Montalt</p>
+    </header>
+
+    <section class="countdown">
+        <h2>Cuenta atrás para el gran día:</h2>
+        <p id="countdown"></p>
+    </section>
+
+    <section class="section">
+        <h2>Ubicación</h2>
+        <p>Can Marial, Sant Vicenç de Montalt</p>
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.577860688135!2d2.501736375646626!3d41.5726376036518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4cb9e7da089cd%3A0x24f4c8a79f66cd85!2sCan%20Marial!5e0!3m2!1ses!2ses!4v1700000000000" 
+            class="map" allowfullscreen="" loading="lazy"></iframe>
+    </section>
+
+    <section class="section">
+        <h2>Confirma tu asistencia</h2>
+        <form id="rsvp-form">
+            <input type="text" id="name" placeholder="Tu nombre" required>
+            <button type="submit">Confirmar asistencia</button>
+        </form>
+        <p id="rsvp-message"></p>
+    </section>
+
+    <section class="section">
+        <h2>Galería</h2>
+        <div class="gallery">
+            <img src="https://via.placeholder.com/200" alt="Foto 1">
+            <img src="https://via.placeholder.com/200" alt="Foto 2">
+            <img src="https://via.placeholder.com/200" alt="Foto 3">
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Marina & Jose | Diseñado con amor</p>
+    </footer>
+
+    <script>
+        // Cuenta atrás
+        const weddingDate = new Date("August 22, 2025 00:00:00").getTime();
+        const countdownElement = document.getElementById("countdown");
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = weddingDate - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            countdownElement.innerText = `${days} días, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+
+            if (timeLeft < 0) {
+                clearInterval(timer);
+                countdownElement.innerText = "¡Hoy es el gran día!";
+            }
+        }
+
+        const timer = setInterval(updateCountdown, 1000);
+
+        // Formulario de asistencia
+        document.getElementById("rsvp-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const name = document.getElementById("name").value;
+            document.getElementById("rsvp-message").innerText = `¡Gracias por confirmar, ${name}!`;
+        });
+    </script>
+</body>
+</html>
